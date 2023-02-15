@@ -1,11 +1,10 @@
-
+// gameplay variables
 var gamePattern = [];
 var buttonColors = ["red", "blue", "green", "yellow"];
-
 var userClickedPattern = [];
-
 var level = 0;
 
+// starts the game by initiating next
 $(document).keypress(function() {
     if(level == 0) {
         nextSequence();
@@ -13,15 +12,13 @@ $(document).keypress(function() {
 });
 
 $(".btn").click(function() {
+    if(level != 0) {
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
     playSound(userChosenColor);
     animatePress(userChosenColor);
-
     checkAnswer();
-
-    if(level != 0) {
-        checkEndTurn();
+    checkEndTurn();
     }
 }); 
 
@@ -59,7 +56,7 @@ function checkAnswer() {
 }
 
 function checkEndTurn() {
-    if(gamePattern.length == userClickedPattern.length) {
+if(gamePattern.length == userClickedPattern.length && level != 0) {
         userClickedPattern = [];
         setTimeout(function() {
             nextSequence();
